@@ -1,6 +1,6 @@
 # Examples
 
-These examples show how to configure `@marcolino/semantic-release-godot` in a `semantic-release` pipeline.
+These examples show how to configure `@victorrl/semantic-release-godot` in a `semantic-release` pipeline.
 
 ## Files
 

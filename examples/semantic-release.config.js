@@ -4,7 +4,7 @@ export default {
 		"@semantic-release/commit-analyzer",
 		"@semantic-release/release-notes-generator",
 		[
-			"@marcolino/semantic-release-godot",
+			"@victorrl/semantic-release-godot",
 			{
 				exportPresetsPath: "export_presets.cfg",
 				projectGodotPath: "project.godot",

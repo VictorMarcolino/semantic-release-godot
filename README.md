@@ -1,4 +1,4 @@
-# `@marcolino/semantic-release-godot`
+# `@victorrl/semantic-release-godot`
 
 `semantic-release` plugin to automate version and build number injection for Godot 4 projects, specifically targeting Android and global game configurations.
 
@@ -34,7 +34,7 @@ const GAME_VERSION = "1.0.1"
 ## Install
 
 ```sh
-npm install --save-dev @marcolino/semantic-release-godot
+npm install --save-dev @victorrl/semantic-release-godot
 ```
 
 ## Usage
@@ -47,7 +47,7 @@ export default {
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
-      "@marcolino/semantic-release-godot",
+      "@victorrl/semantic-release-godot",
       {
         // By default, Approach A is enabled, Approach B is disabled
         enableApproachA: true,
