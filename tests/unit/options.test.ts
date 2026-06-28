@@ -16,6 +16,7 @@ describe("resolveGodotConfig", () => {
 			gdScriptVersionConstant: "GAME_VERSION",
 			versionCode: null,
 			versionCodeOffset: 0,
+			buildCommand: null,
 		});
 	});
 
@@ -31,6 +32,7 @@ describe("resolveGodotConfig", () => {
 				gdScriptVersionConstant: "CUSTOM_VERSION_CONST",
 				versionCode: 42,
 				versionCodeOffset: 10,
+				buildCommand: "make android-release",
 			},
 			{},
 		);
@@ -45,6 +47,7 @@ describe("resolveGodotConfig", () => {
 			gdScriptVersionConstant: "CUSTOM_VERSION_CONST",
 			versionCode: 42,
 			versionCodeOffset: 10,
+			buildCommand: "make android-release",
 		});
 	});
 
@@ -61,6 +64,7 @@ describe("resolveGodotConfig", () => {
 				GODOT_GDSCRIPT_VERSION_CONSTANT: "ENV_VERSION_CONST",
 				GODOT_VERSION_CODE: "99",
 				GODOT_VERSION_CODE_OFFSET: "5",
+				GODOT_BUILD_COMMAND: "make android-release",
 			},
 		);
 
@@ -74,6 +78,7 @@ describe("resolveGodotConfig", () => {
 			gdScriptVersionConstant: "ENV_VERSION_CONST",
 			versionCode: 99,
 			versionCodeOffset: 5,
+			buildCommand: "make android-release",
 		});
 	});
 

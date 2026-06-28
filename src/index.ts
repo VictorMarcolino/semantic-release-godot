@@ -1,4 +1,4 @@
-import { execFile } from "node:child_process";
+import { execFile, spawn } from "node:child_process";
 import { access, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { promisify } from "node:util";
@@ -7,6 +7,54 @@ import { GodotPluginError } from "./error.js";
 import { type GodotPluginOptions, resolveGodotConfig } from "./options.js";
 
 const execFileAsync = promisify(execFile);
+
+/** Run an arbitrary shell command, streaming stdout/stderr to the logger. Rejects on non-zero exit. */
+const runBuildCommand = (
+	command: string,
+	cwd: string,
+	logger: { log: (msg: string) => void },
+): Promise<void> =>
+	new Promise((resolve, reject) => {
+		logger.log(`[semantic-release-godot] Running build command: ${command}`);
+		const child = spawn("sh", ["-c", command], {
+			cwd,
+			env: process.env,
+			stdio: "pipe",
+		});
+		child.stdout.on("data", (chunk: Buffer) => {
+			for (const line of chunk.toString().split("\n")) {
+				if (line.trim()) logger.log(line);
+			}
+		});
+		child.stderr.on("data", (chunk: Buffer) => {
+			for (const line of chunk.toString().split("\n")) {
+				if (line.trim()) logger.log(line);
+			}
+		});
+		child.on("close", (code) => {
+			if (code === 0) {
+				logger.log("[semantic-release-godot] Build command completed successfully.");
+				resolve();
+			} else {
+				reject(
+					new GodotPluginError(
+						"EBUILDCOMMAND",
+						`semantic-release-godot: Build command exited with code ${code}.`,
+						`Command: ${command}`,
+					),
+				);
+			}
+		});
+		child.on("error", (err) => {
+			reject(
+				new GodotPluginError(
+					"EBUILDCOMMAND",
+					"semantic-release-godot: Failed to spawn build command.",
+					err.message,
+				),
+			);
+		});
+	});
 
 export type { GodotPluginOptions };
 
@@ -336,6 +384,11 @@ export async function prepare(
 		context.logger.log(
 			`[semantic-release-godot] Updated GDScript constant "${config.gdScriptVersionConstant}" in "${config.gdScriptPath}" to "${versionName}"`,
 		);
+	}
+
+	// 5. If a buildCommand is set, run it now (after version files are patched)
+	if (config.buildCommand) {
+		await runBuildCommand(config.buildCommand, cwd, context.logger);
 	}
 
 	context.logger.success(

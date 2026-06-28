@@ -10,6 +10,8 @@ export interface GodotPluginOptions {
 	readonly gdScriptVersionConstant?: string;
 	readonly versionCode?: number;
 	readonly versionCodeOffset?: number;
+	/** Optional shell command to run after version files are patched (e.g. "make android-release"). Runs in the project cwd and inherits all environment variables. */
+	readonly buildCommand?: string;
 }
 
 export interface ResolvedGodotPluginConfig {
@@ -22,6 +24,7 @@ export interface ResolvedGodotPluginConfig {
 	readonly gdScriptVersionConstant: string;
 	readonly versionCode: number | null;
 	readonly versionCodeOffset: number;
+	readonly buildCommand: string | null;
 }
 
 const parseBoolean = (
@@ -110,5 +113,9 @@ export function resolveGodotConfig(
 			"GAME_VERSION",
 		versionCode: versionCodeRaw,
 		versionCodeOffset,
+		buildCommand:
+			pluginConfig.buildCommand ||
+			env.GODOT_BUILD_COMMAND ||
+			null,
 	};
 }
