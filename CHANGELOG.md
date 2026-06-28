@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/VictorMarcolino/semantic-release-godot/compare/v1.0.1...v1.1.0) (2026-06-28)
+
+
+### Features
+
+* add optional buildCommand hook to prepare phase ([854a118](https://github.com/VictorMarcolino/semantic-release-godot/commit/854a118e43a291ecaf3e19733bbdb346ea75870f))
+
 ## [1.0.1](https://github.com/VictorMarcolino/semantic-release-godot/compare/v1.0.0...v1.0.1) (2026-06-28)
 
 
