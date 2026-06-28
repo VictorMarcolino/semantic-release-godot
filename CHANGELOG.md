@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/VictorMarcolino/semantic-release-godot/compare/v1.0.0...v1.0.1) (2026-06-28)
+
+
+### Bug Fixes
+
+* rename package scope to [@victorrl](https://github.com/victorrl) to match npm owner ([eaffb44](https://github.com/VictorMarcolino/semantic-release-godot/commit/eaffb44e3c6dc1e652e9e937a449a89fca23388f))
+
 # 1.0.0 (2026-06-28)
 
 
