@@ -33,7 +33,9 @@ const runBuildCommand = (
 		});
 		child.on("close", (code) => {
 			if (code === 0) {
-				logger.log("[semantic-release-godot] Build command completed successfully.");
+				logger.log(
+					"[semantic-release-godot] Build command completed successfully.",
+				);
 				resolve();
 			} else {
 				reject(

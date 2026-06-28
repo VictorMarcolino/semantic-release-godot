@@ -113,9 +113,6 @@ export function resolveGodotConfig(
 			"GAME_VERSION",
 		versionCode: versionCodeRaw,
 		versionCodeOffset,
-		buildCommand:
-			pluginConfig.buildCommand ||
-			env.GODOT_BUILD_COMMAND ||
-			null,
+		buildCommand: pluginConfig.buildCommand || env.GODOT_BUILD_COMMAND || null,
 	};
 }
