@@ -44,18 +44,6 @@ jobs:
       - name: Run tests
         run: bun test tests
 
-      - name: Diagnose secrets
-        env:
-          NPM_TOKEN_SECRET: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN_VAR: ${{ vars.NPM_TOKEN }}
-          NPM_AUTH_TOKEN_SECRET: ${{ secrets.NPM_AUTH_TOKEN }}
-          NPM_AUTH_TOKEN_VAR: ${{ vars.NPM_AUTH_TOKEN }}
-        run: |
-          echo "NPM_TOKEN_SECRET length: ${#NPM_TOKEN_SECRET}"
-          echo "NPM_TOKEN_VAR length: ${#NPM_TOKEN_VAR}"
-          echo "NPM_AUTH_TOKEN_SECRET length: ${#NPM_AUTH_TOKEN_SECRET}"
-          echo "NPM_AUTH_TOKEN_VAR length: ${#NPM_AUTH_TOKEN_VAR}"
-
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
